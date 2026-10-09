@@ -65,6 +65,7 @@ const TOOLS=[
 {t:"translator",c:"language",en:"Quick Translator",enD:"Offline mini-dictionary plus Google link."},
 {t:"summarizer",c:"smart",en:"Smart Summarizer",enD:"Fast extractive summary of long text."},
 {t:"paraphraser",c:"smart",en:"Paraphraser",enD:"Rewrite text with smart synonyms."},
+{t:"ai-paraphraser",c:"smart",en:"AI Paraphraser (Online)",enD:"High-quality rewrite via free API, offline fallback."},
 {t:"keywords",c:"smart",en:"Keyword Extractor",enD:"Find the top keywords of any text."},
 {t:"hashtags",c:"smart",en:"Hashtag Generator",enD:"Hashtags ready for social media."},
 {t:"title-generator",c:"smart",en:"Title Generator",enD:"10 catchy headlines from one idea."},

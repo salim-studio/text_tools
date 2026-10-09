@@ -43,7 +43,7 @@
 <script>
 toolCountTop.textContent=TOOLS.length+" / online tools";tc.textContent=TOOLS.length+"+";
 catGrid.innerHTML=CATS.map(c=>`<a class="card" href="tools.html#c-${c.id}"><div style="display:flex;gap:12px;align-items:center;margin-bottom:6px">${TextIcons.tile(c.id,c.id,48)}<h3 style="margin:0">${c.en}</h3></div><p>${c.enD}</p><span class="pill">${c.count} tools</span></a>`).join('');
-const pop=["word-counter","summarizer","paraphraser","title-generator","email-generator","extract-emails","hashtags","base64-encode","text-case","cool-fonts","story-generator","video-script"];
+const pop=["word-counter","summarizer","ai-paraphraser","paraphraser","title-generator","email-generator","extract-emails","hashtags","base64-encode","text-case","cool-fonts","story-generator","video-script"];
 popGrid.innerHTML=pop.map(s=>{const t=TOOLS.find(x=>x.t===s);if(!t)return"";return toolCard(t);}).join("");
 function toolCard(t){return `<a class="card" href="tool.html?tool=${t.t}"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">${TextIcons.tile(t.c,t.t,40)}<h3 style="margin:0;flex:1;min-width:0">${t.en}</h3></div><p>${t.enD}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="pill ok">⚡ Working</span></div></a>`;}
 const feats=["Count words, characters and reading time instantly","Clean and format messy text in one click","Convert, encode and extract data from text","Style text for social media and the web","Summarize, rewrite and generate content offline","Keep everything private — 100% in-browser"];

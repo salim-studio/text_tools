@@ -46,7 +46,7 @@ opts.innerHTML=Engine.opts(tool.t)||"";
 relGrid.innerHTML=TOOLS.filter(t=>t.c===tool.c&&t.t!==tool.t).slice(0,4).map(t=>`<a class="card" href="tool.html?tool=${t.t}"><div style="display:flex;gap:10px;align-items:center">${TextIcons.tile(t.c,t.t,36)}<h3 style="margin:0">${t.en}</h3></div><p>${t.enD}</p></a>`).join("");
 const $=id=>document.getElementById(id);
 function collect(){const o={};opts.querySelectorAll("input,select").forEach(e=>{o[e.id]=e.type==="checkbox"?e.checked:e.value;});return o;}
-function run(){try{$("out").value=Engine.run(tool.t,$("inp").value,collect());}catch(e){$("out").value="Error: "+(e.message||e);}updateStats();}
+async function run(){try{$("out").value="⏳ Working…";$("out").value=await Engine.runAsync(tool.t,$("inp").value,collect());}catch(e){$("out").value="Error: "+(e.message||e);}updateStats();}
 function updateStats(){const t=$("inp").value;const w=(t.trim().match(/\S+/g)||[]).length;$("stats").innerHTML=`Words: <b>${w}</b> | Characters: <b>${t.length}</b> | Lines: <b>${t?t.split("\n").length:0}</b> | Reading: <b>${Math.ceil(w/200)} min</b>`;}
 function pasteIn(){navigator.clipboard.readText().then(x=>{$("inp").value=x;updateStats();});}
 function loadSample(){$("inp").value="TextTools is a fast, private text toolkit that runs in your browser.\nContact us at hello@example.com or visit https://example.com\nThe price is 1,250,000. I love programming and I love coffee!";updateStats();run();}
