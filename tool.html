@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tool — TextTools</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/tools-data.js"></script><script src="js/icons.js"></script><script src="js/engine.js"></script>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="logo" href="index.html"><img src="assets/logo.svg" alt="TextTools logo">Text<span>Tools</span></a>
+<div class="navlinks"><a href="tools.html">← Back</a></div>
+</div></header>
+<div class="wrap"><section class="section">
+<div id="head"></div>
+<div class="opts" id="opts"></div>
+<div class="grid2">
+<div><b>📥 Input</b><textarea class="io" id="inp" placeholder="Paste your text here…"></textarea>
+<div class="opts">
+<button class="btn ghost" onclick="pasteIn()">Paste</button>
+<button class="btn ghost" onclick="loadSample()">Sample</button>
+<button class="btn ghost" onclick="swapIO()">⇄ Swap</button>
+<button class="btn ghost" onclick="document.getElementById('file').click()">📂 File</button>
+<input type="file" id="file" hidden onchange="loadFile(event)">
+</div></div>
+<div><b>📤 Output</b><textarea class="io" id="out" placeholder="Result will appear here…"></textarea>
+<div class="opts">
+<button class="btn" onclick="run()">▶ Run</button>
+<button class="btn ghost" onclick="copyOut()">📋 Copy</button>
+<button class="btn ghost" onclick="downloadOut()">⬇ .txt</button>
+</div></div>
+</div>
+<div class="stats" id="stats"></div>
+<div class="result" id="rel"></div>
+</section>
+<section class="section"><h2>Related tools</h2><div class="grid" id="relGrid"></div></section>
+</div>
+<footer><div class="wrap"><div class="footer-brand"><img src="assets/logo.svg" alt="TextTools logo">Fast, Private, All-in-One Text Toolkit</div><br><span class="copyright">Copyright © 2026 salim-slimani. All rights reserved.</span></div></footer>
+<script>
+const slug=new URLSearchParams(location.search).get("tool");
+const tool=TOOLS.find(t=>t.t===slug)||TOOLS[0];
+const cat=CATS.find(c=>c.id===tool.c);
+document.title=tool.en+" — TextTools";
+head.innerHTML=`<div style="display:flex;gap:14px;align-items:center;margin-bottom:6px">${TextIcons.tile(tool.c,tool.t,56)}<div><span class="pill">${cat.en}</span><h2 style="margin:6px 0">${tool.en}</h2></div></div><p class="sub">${tool.enD}</p><span class="pill ok">⚡ Working offline</span>`;
+opts.innerHTML=Engine.opts(tool.t)||"";
+relGrid.innerHTML=TOOLS.filter(t=>t.c===tool.c&&t.t!==tool.t).slice(0,4).map(t=>`<a class="card" href="tool.html?tool=${t.t}"><div style="display:flex;gap:10px;align-items:center">${TextIcons.tile(t.c,t.t,36)}<h3 style="margin:0">${t.en}</h3></div><p>${t.enD}</p></a>`).join("");
+const $=id=>document.getElementById(id);
+function collect(){const o={};opts.querySelectorAll("input,select").forEach(e=>{o[e.id]=e.type==="checkbox"?e.checked:e.value;});return o;}
+function run(){try{$("out").value=Engine.run(tool.t,$("inp").value,collect());}catch(e){$("out").value="Error: "+(e.message||e);}updateStats();}
+function updateStats(){const t=$("inp").value;const w=(t.trim().match(/\S+/g)||[]).length;$("stats").innerHTML=`Words: <b>${w}</b> | Characters: <b>${t.length}</b> | Lines: <b>${t?t.split("\n").length:0}</b> | Reading: <b>${Math.ceil(w/200)} min</b>`;}
+function pasteIn(){navigator.clipboard.readText().then(x=>{$("inp").value=x;updateStats();});}
+function loadSample(){$("inp").value="TextTools is a fast, private text toolkit that runs in your browser.\nContact us at hello@example.com or visit https://example.com\nThe price is 1,250,000. I love programming and I love coffee!";updateStats();run();}
+function loadFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$("inp").value=r.result;updateStats();};r.readAsText(f);}
+function swapIO(){const a=$("inp").value;$("inp").value=$("out").value;$("out").value=a;updateStats();}
+function copyOut(){$("out").select();document.execCommand("copy");navigator.clipboard.writeText($("out").value);}
+function downloadOut(){const b=new Blob([$("out").value],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="texttools-"+tool.t+".txt";a.click();}
+$("inp").addEventListener("input",updateStats);
+if(["word-counter","word-frequency","grammar-check","keywords"].includes(tool.t))run();
+</script>
+</body></html>

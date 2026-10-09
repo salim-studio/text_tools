@@ -1,42 +1,61 @@
-# TextTools — All-in-One Text Toolkit
+# TextTools — Free Online Text Tools
 
-Fast, private, offline-first text toolkit by **Salim Slimani**. 70+ tools in a single `index.html` — no server, no install.
+[![100% client-side](https://img.shields.io/badge/client--side-100%25-22C55E)](https://salim-studio.github.io/text_tools/) [![70 tools](https://img.shields.io/badge/tools-70-blue)](https://salim-studio.github.io/text_tools/tools.html) [![English](https://img.shields.io/badge/language-English-blue)](https://salim-studio.github.io/text_tools/)
 
-Live demo: https://salim-studio.github.io/text_tools/
+**Fast, Private, All-in-One Text Toolkit.**
+Edit, format, convert, encode and generate text — 100% in your browser.
 
-## ✨ Features
+🌐 **Live demo:** https://salim-studio.github.io/text_tools/
 
-- **70+ tools** in one file: edit, format, convert, extract, encode, style, language & smart writing
-- **100% private:** all processing runs locally in the browser
-- **Fast:** pure Vanilla JS, zero dependencies, works offline
-- **Instant search + live stats** (words, characters, lines, reading time)
-- **New visual identity:** TT monogram, gradient brand, clean dark UI
+---
 
-## 📂 Categories
+## Why TextTools?
 
-| Category | Tools |
-|----------|-------|
-| Edit & Analyze | Word Counter, Frequency, Find & Replace (Regex), Word Wrap |
-| Format & Clean | Case Converter, Sort, Line Numbers, Prefix/Suffix, Justify/Center/Pad, Dedup, Clean Spaces, Emojis, Unicode, Reverse, CSV Columns, Spaces↔Tabs, Thousand Separators |
-| Convert & Extract | Repeater, URL/Email Extractor, HTML/JSON/XML to Text, Download txt, Print PDF |
-| Encode & Style | Base64, URL, HTML, Mirror, Flip, Bold, Italic, Cursive, Old English, Cool Fonts, Symbols |
-| Language | Remove Accents, Normalize Numbers, Grammar Check, Quick Translator |
-| Smart Writing (offline) | Summarizer, Paraphraser, Keywords, Hashtags, Titles, Emails, Articles, Essays, Stories, Paragraphs, Slogans, Business Names, Tweets, Video Scripts, Q&A |
+- **70 tools** in 6 categories: edit, format, convert, encode, language, smart writing — **all work fully in-browser**
+- **100% private** — text never leaves your device, no account, no uploads
+- **Offline smart writers**: summarizer, paraphraser, emails, articles, stories, hashtags and more — no AI server needed
+- **Everyday essentials**: counters, cleaners, case converter, Base64, URL/HTML codecs, social fonts, extractors
 
-## 🚀 Run
+## Brand Identity
 
-Just open the file — no server needed:
+| Element | Description |
+|---|---|
+| Name | TextTools |
+| Tagline | Fast, Private, All-in-One Text Toolkit |
+| Logo | `assets/logo.svg` — document + teal/violet T badge (also used as favicon) |
+| Banner | `assets/banner.svg` — 1200×380 social / GitHub preview |
+| Hero visual | `assets/hero.svg` — homepage illustration |
+| Palette | Navy `#0B1220` • Teal `#06B6D4` • Violet `#8B5CF6` • Green `#22C55E` |
+| Language | English |
+| Owner | Salim Slimani |
 
-```bash
-start index.html
-```
-
-Or with a local server:
+## Quick Start
 
 ```bash
+# Any static server, e.g.:
 python -m http.server 8000
+# Then open: http://localhost:8000
 ```
 
-## © License
+Or open `index.html` directly in a browser. To publish with GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `/(root)`.
 
-© 2026 Salim Slimani. All rights reserved.
+## Project Structure
+
+```
+index.html        Home (categories + popular tools + search + hero visual)
+tools.html        All 70 tools with search and filters
+tool.html         Run any tool (?tool=word-counter)
+assets/           logo.svg, banner.svg, hero.svg (brand identity)
+css/style.css     Styles + branded header and footer
+js/tools-data.js  Tool catalog (70 tools)
+js/engine.js      Offline text processing engine
+js/icons.js       Gradient tile icon system
+```
+
+## Privacy
+
+All processing happens locally in your browser. Nothing is uploaded anywhere.
+
+## License
+
+MIT — Copyright © 2026 salim-slimani. All rights reserved.

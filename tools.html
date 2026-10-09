@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Text Tools — TextTools</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/tools-data.js"></script><script src="js/icons.js"></script>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+<a class="logo" href="index.html"><img src="assets/logo.svg" alt="TextTools logo">Text<span>Tools</span></a>
+<div class="navlinks"><a href="index.html">← Home</a></div>
+</div></header>
+<div class="wrap"><section class="section">
+<h2>Browse all text tools</h2>
+<input id="q" class="search" placeholder="Search a tool…">
+<div class="opts" id="catFilter"></div>
+<div id="list"></div>
+</section></div>
+<footer><div class="wrap"><div class="footer-brand"><img src="assets/logo.svg" alt="TextTools logo"><a href="index.html">Home</a></div><div>Fast, Private, All-in-One Text Toolkit</div><br><span class="copyright">Copyright © 2026 salim-slimani. All rights reserved.</span></div></footer>
+<script>
+let active=(location.hash||"").replace("#","").replace("c-","")||"all";
+const qp=new URLSearchParams(location.search).get("q")||"";
+q.value=qp;
+function renderCats(){
+ const all=[{id:"all",en:"All"},...CATS];
+ catFilter.innerHTML=all.map(c=>`<button class="btn${active===c.id?"":" ghost"}" style="padding:8px 16px" data-c="${c.id}">${c.en}</button>`).join("");
+ catFilter.querySelectorAll("button").forEach(b=>b.onclick=()=>{active=b.dataset.c;renderCats();render();});
+}
+function render(){
+ const s=q.value.trim().toLowerCase();
+ const items=TOOLS.filter(t=>{
+  if(active!=="all"&&t.c!==active)return false;
+  if(!s)return true;
+  return (t.en+" "+t.enD+" "+t.t).toLowerCase().includes(s);
+ });
+ let html="",last="";
+ items.forEach(t=>{
+  if(t.c!==last){if(last)html+="</div>";last=t.c;const c=CATS.find(x=>x.id===t.c);html+=`<h3 style="margin:22px 0 10px;display:flex;gap:10px;align-items:center">${TextIcons.tile(c.id,c.id,34)}<span>${c.en}</span></h3><div class="grid">`;}
+  html+=`<a class="card" href="tool.html?tool=${t.t}"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">${TextIcons.tile(t.c,t.t,40)}<h3 style="margin:0;flex:1;min-width:0">${t.en}</h3></div><p>${t.enD}</p><span class="pill ok">⚡ Working</span></a>`;
+ });
+ if(items.length)html+="</div>";
+ list.innerHTML=html||"<p>—</p>";
+}
+q.oninput=render;renderCats();render();
+</script>
+</body></html>
